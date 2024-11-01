@@ -50,8 +50,6 @@ class JobListingController extends Controller
 
     public function edite(int $id)
     {
-        // dd("you edite " . $id);
-        //validation 
 
         $data =  Request()->validate([
             'name' => ['required', 'min:3'],
