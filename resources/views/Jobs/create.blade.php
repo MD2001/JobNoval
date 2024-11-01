@@ -15,7 +15,8 @@
             </div>
         </div>
         <div class="mt-6 flex items-center justify-end gap-x-6">
-            <button type="button" class="text-sm/6 font-semibold text-gray-900">Cancel</button>
+           <a href="/jobs"> <button type="button" class="text-sm/6 font-semibold text-gray-900">Cancel</button></a>
+            {{-- <x-button class="text-sm/6 font-semibold text-gray-900 bg-indigo-600">Cancel</x-button> --}}
             <x-submit-button class="bg-indigo-600">Submit</x-submit-button>
         </div>
     </form>

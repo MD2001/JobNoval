@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\JobListingController;
+use App\Http\Controllers\RegisterationController;
 use Illuminate\Support\Facades\Route;
 
 
@@ -17,4 +18,11 @@ Route::controller(JobListingController::class)->group(function()
     Route::delete('/jobs/{id}','delete');
     Route::get('/jobs/{id}','show');
     
+});
+
+Route::controller(RegisterationController::class)->group(function()
+{
+    Route::get("/register","register_view");
+    Route::get("/login","login_view");
+    Route::post("/login","login");
 });

@@ -29,21 +29,10 @@
                         </div>
                     </div>
 
-                    <div class="hidden md:block">
-                        <div class="ml-4 flex items-center md:ml-6">
-
-                            <!-- Profile dropdown -->
-                            <div class="relative ml-3">
-                                <div>
-                                    <button type="button" class="relative flex max-w-xs items-center rounded-full bg-gray-800 text-sm focus:outline-none focus:ring-2 focus:ring-white focus:ring-offset-2 focus:ring-offset-gray-800" id="user-menu-button" aria-expanded="false" aria-haspopup="true">
-                                        <span class="absolute -inset-1.5"></span>
-                                        <span class="sr-only">Open user menu</span>
-                                        <img class="h-8 w-8 rounded-full" src="https://scontent.faly2-1.fna.fbcdn.net/v/t1.6435-9/161435788_2909100045971939_6454911971602968610_n.jpg?_nc_cat=111&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=ctflR3BYRkUQ7kNvgE7C_WS&_nc_zt=23&_nc_ht=scontent.faly2-1.fna&_nc_gid=A2RH4BGH2jYq9jwF4odNfki&oh=00_AYAF3PtOKNXp1PezdZJF41_5c9KFu8JZxxMxapuGxyHrPA&oe=67495E25" alt="profile image">
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                  <div >
+                    <x-button href="/register" class="bg-inherit mx-2"> Register</x-button>
+                    <x-button href="/login" class="bg-inherit"> Log in</x-button>
+                  </div>
 
                     <div class="-mr-2 flex md:hidden">
                         <!-- Mobile menu button -->

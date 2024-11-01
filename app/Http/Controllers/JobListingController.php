@@ -61,6 +61,7 @@ class JobListingController extends Controller
         JobsListing::find($id)->update($data);
 
         return redirect("/jobs/" . $id);
+        
     }
 
     public function delete(int $id)
