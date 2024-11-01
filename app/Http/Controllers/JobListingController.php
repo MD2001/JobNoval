@@ -45,16 +45,29 @@ class JobListingController extends Controller
 
     public function edite_show(int $id)
     {
-        return view("Jobs.edite",["job" => JobsListing::find($id)]);
+        return view("Jobs.edite", ["job" => JobsListing::find($id)]);
     }
 
     public function edite(int $id)
     {
-        dd("you edite " . $id);
+        // dd("you edite " . $id);
+        //validation 
+
+        $data =  Request()->validate([
+            'name' => ['required', 'min:3'],
+            'cname' => ['required', 'min:3'],
+            'title' => ['required', 'min:3'],
+            'salary' => ['required'],
+        ]);
+
+        JobsListing::find($id)->update($data);
+
+        return redirect("/jobs/" . $id);
     }
 
     public function delete(int $id)
     {
-        dd("you delete " . $id);
+        JobsListing::destroy($id);
+        return redirect("/jobs/");
     }
 }
