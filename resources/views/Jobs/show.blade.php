@@ -18,7 +18,9 @@
         </div>
     @endif
 
-    <div class=" m-1 mt-2 p-3 bg-gray-200 rounded-xl font-mono text-xl text-center">{{ $job['name'] }}</div>
+    <div class=" m-1 mt-2 p-3 bg-gray-200 rounded-xl font-mono text-xl text-center">@foreach ($job->emploer as $employer )
+        {{ $employer->name }}<br>
+    @endforeach</div>
 
     <form id="delete-form" method="POST" action="/jobs/{{ $job["id"] }}">
         @csrf

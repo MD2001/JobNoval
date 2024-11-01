@@ -2,12 +2,14 @@
 
 namespace Database\Factories;
 
+use App\Models\emploer;
+use App\Models\JobsListing;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
- * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\JobsListing>
+ * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Job_emploer_tag>
  */
-class JobsListingFactory extends Factory
+class JobEmploerTagFactory extends Factory
 {
     /**
      * Define the model's default state.
@@ -17,9 +19,8 @@ class JobsListingFactory extends Factory
     public function definition(): array
     {
         return [
-            'title'=>fake()->jobTitle(),
-            'cname'=>fake()->company(),
-            'salary'=>'$100,000',
+           "emploer_id"=>emploer::factory(),
+           "jobs_listing_id"=>JobsListing::factory(),
         ];
     }
 }

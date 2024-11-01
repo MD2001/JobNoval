@@ -12,4 +12,9 @@ class JobsListing extends Model
 
     protected $fillable=['name','salary','title','cname'];
    
+    public function emploer()
+    {
+        return $this->belongsToMany(emploer::class,table:"job_emploer_tags");
+    }
+    
 }
