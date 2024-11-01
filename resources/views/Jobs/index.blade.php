@@ -2,7 +2,7 @@
 <x-layout>
     <x-slot:title> jobs </x-slot:title>
     <x-slot:Dashbord> Jobs 
-       <x-button class="bg-indigo-600" href="/jobs/create"> Create Job</x-button>
+       <x-button  href="/jobs/create"> Create Job</x-button>
     </x-slot:Dashbord>
 
     @if ($jobs == null)

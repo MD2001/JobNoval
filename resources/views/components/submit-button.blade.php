@@ -1,4 +1,8 @@
-@props(['form' => null])
+@props(['form' => null,"classes"])
+
+@php
+    $classes=$attributes->get('class')??"bg-indigo-600";
+@endphp
 
 <button
     {{ $attributes->merge([
@@ -14,7 +18,7 @@
                     focus-visible:outline-2 
                     focus-visible:outline-offset-2 
                     focus-visible:outline-indigo-600
-                    float-right",
+                    float-right $classes"  ,
     ]) }}
     type="submit"
     @if($form !== null) form="{{ $form }}" @endif

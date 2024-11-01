@@ -1,8 +1,12 @@
-@props(['href' => '/about'])
+@props(['href' => '/about',"classes"])
+
+@php
+    $classes=$attributes->get('class')??"bg-indigo-600";
+@endphp
 <a href="{{ $href }}">
     <div
         {{ $attributes->merge([
-            'class' => 'rounded-md
+            'class' => "rounded-md
                         px-3
                         py-2
                         text-sm
@@ -14,7 +18,7 @@
                         focus-visible:outline-2
                         focus-visible:outline-offset-2
                         focus-visible:outline-indigo-600
-                        float-right',
+                        float-right $classes",
         ]) }}>
         {{ $slot }}</div>
 </a>

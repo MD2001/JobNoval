@@ -17,7 +17,7 @@
         </div>
         <div class="mt-6 flex items-center justify-end gap-x-6">
             <button type="button" class="text-sm/6 font-semibold text-gray-900">Cancel</button>
-            <x-submit-button class="bg-blue-500">Save</x-submit-button>
+            <x-submit-button >Save</x-submit-button>
         </div>
     </form>
 
