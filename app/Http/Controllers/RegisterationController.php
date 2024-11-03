@@ -19,7 +19,7 @@ class RegisterationController extends Controller
             "password"=>['required','confirmed','min:6'],
         ]);
         $emp=emploer::create($data);
-        return redirect('/')->with("emp",$emp);
+        return view('Home', ['emp' => $emp]);
     }
 
     public function login_view()
