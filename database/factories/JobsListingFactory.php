@@ -2,6 +2,7 @@
 
 namespace Database\Factories;
 
+use App\Models\emploer;
 use Illuminate\Database\Eloquent\Factories\Factory;
 
 /**
@@ -18,6 +19,7 @@ class JobsListingFactory extends Factory
     {
         return [
             'title'=>fake()->jobTitle(),
+            "emploer_id"=>emploer::factory(),
             'cname'=>fake()->company(),
             'salary'=>'$100,000',
         ];

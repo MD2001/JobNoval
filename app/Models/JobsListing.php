@@ -14,7 +14,7 @@ class JobsListing extends Model
    
     public function emploer()
     {
-        return $this->belongsToMany(emploer::class,table:"job_emploer_tags");
+        return $this->belongsTo(emploer::class) ;
     }
     
 }
