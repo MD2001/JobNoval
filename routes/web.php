@@ -23,6 +23,7 @@ Route::controller(JobListingController::class)->group(function()
 Route::controller(RegisterationController::class)->group(function()
 {
     Route::get("/register","register_view");
+    Route::post("/register","register");
     Route::get("/login","login_view");
     Route::post("/login","login");
 });

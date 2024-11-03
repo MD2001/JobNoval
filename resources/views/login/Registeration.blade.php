@@ -1,7 +1,7 @@
 <x-layout>
     <x-slot:title> Registeration </x-slot:title>
     <x-slot:Dashbord> Registeration page </x-slot:Dashbord>
-    <form method="POST" action="/login">
+    <form method="POST" action="/register">
         <div class="space-y-12">
             <div class="border-b border-gray-900/10 pb-12">
                 <h2 class="text-base/7 font-semibold text-gray-900">Profile</h2>
