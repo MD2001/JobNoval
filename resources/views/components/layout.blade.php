@@ -29,10 +29,16 @@
                         </div>
                     </div>
 
-                  <div >
+                 @auth
+                 <x-button href="/logout" class="bg-inherit mx-2"> Logout</x-button>
+                 @endauth
+                 @guest
+                 <div >
                     <x-button href="/register" class="bg-inherit mx-2"> Register</x-button>
                     <x-button href="/login" class="bg-inherit"> Log in</x-button>
-                  </div>
+                  </div>    
+                 @endguest
+                 
 
                     <div class="-mr-2 flex md:hidden">
                         <!-- Mobile menu button -->
