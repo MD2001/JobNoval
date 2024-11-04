@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\emploer;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class RegisterationController extends Controller
 {
@@ -13,13 +14,15 @@ class RegisterationController extends Controller
     }
     public function register()
     {
-        $data=Request()->validate([
-            "name"=>['required','min:3'],
-            "email"=>['required','email'],
-            "password"=>['required','confirmed','min:6'],
+        $data = Request()->validate([
+            "name" => ['required', 'min:3'],
+            "email" => ['required', 'email'],
+            "password" => ['required', 'confirmed', 'min:6'],
         ]);
-        $emp=emploer::create($data);
-        return view('Home', ['emp' => $emp]);
+        $emp = emploer::create($data);
+
+       Auth::login($emp);
+        return redirect('/');
     }
 
     public function login_view()
@@ -29,12 +32,10 @@ class RegisterationController extends Controller
 
     public function login()
     {
-        $data=Request()->validate([
-            "name"=>['required','min:3'],
-            "email"=>['required','email'],
-            "password"=>['required','confirmed','min:6'],
+        $data = Request()->validate([
+            "name" => ['required', 'min:3'],
+            "email" => ['required', 'email'],
+            "password" => ['required', 'confirmed', 'min:6'],
         ]);
-
-        
     }
 }

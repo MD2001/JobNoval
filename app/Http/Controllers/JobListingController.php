@@ -50,18 +50,16 @@ class JobListingController extends Controller
 
     public function edite(int $id)
     {
-
+        
         $data =  Request()->validate([
-            'name' => ['required', 'min:3'],
             'cname' => ['required', 'min:3'],
             'title' => ['required', 'min:3'],
             'salary' => ['required'],
         ]);
-
-        JobsListing::find($id)->update($data);
-
-        return redirect("/jobs/" . $id);
         
+        JobsListing::find($id)->update($data);
+        
+        return redirect("/jobs/" . $id);
     }
 
     public function delete(int $id)

@@ -9,7 +9,6 @@
                     you share.</p>
                 @csrf
                 @method("PATCH")
-                <x-input name="name" id="name" label='User Name' placeholder="Mohamed diaa" value="{{ $job->emploer->name }}" ></x-input>
                 <x-input name="cname" id="cname" label='Company name' placeholder="Company name" value="{{ $job['cname'] }}"></x-input>              
                 <x-input name="title" id="title" label='Title' placeholder="Backend Developer" value="{{ $job['title'] }}" ></x-input>
                 <x-input name="salary" id="salary" label='Salary' placeholder="150,000" value="{{ $job['salary'] }}" span='USD$' ></x-input>

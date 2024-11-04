@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\JobListingController;
 use App\Http\Controllers\RegisterationController;
 use Illuminate\Support\Facades\Route;
@@ -27,3 +28,6 @@ Route::controller(RegisterationController::class)->group(function()
     Route::get("/login","login_view");
     Route::post("/login","login");
 });
+
+
+
