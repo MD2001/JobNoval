@@ -2,7 +2,9 @@
 <x-layout>
     <x-slot:title> jobs </x-slot:title>
     <x-slot:Dashbord> Jobs 
+       @auth
        <x-button  href="/jobs/create"> Create Job</x-button>
+       @endauth
     </x-slot:Dashbord>
 
     @if ($jobs == null)

@@ -8,7 +8,6 @@
                 <p class="mt-1 text-sm/6 text-gray-600">This information will be displayed publicly so be careful what
                     you share.</p>
                 @csrf
-                <x-input name="name" id="name" label='User Name' placeholder="Mohamed diaa" ></x-input>
                 <x-input name="cname" id="cname" label='Company name' placeholder="Company name"></x-input>              
                 <x-input name="title" id="title" label='Title' placeholder="Backend Developer" ></x-input>
                 <x-input name="salary" id="salary" label='Salary' placeholder="150,000" span='USD$'></x-input>

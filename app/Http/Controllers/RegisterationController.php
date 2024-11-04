@@ -32,12 +32,12 @@ class RegisterationController extends Controller
 
     public function login()
     {
-        $data = Request()->validate([
+        $user = Request()->validate([
             "email" => ['required', 'email'],
             "password" => ['required','min:6'],
         ]);
 
-        Auth::attempt($data);
+        Auth::attempt($user);
 
         request()->session()->regenerate();
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\JobsListing;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class JobListingController extends Controller
 {
@@ -29,13 +30,14 @@ class JobListingController extends Controller
         //validation 
 
         $data =  Request()->validate([
-            'name' => ['required', 'min:3'],
             'cname' => ['required', 'min:3'],
             'title' => ['required', 'min:3'],
             'salary' => ['required'],
         ]);
+        $data["emploer_id"]=Auth::user()->id;
         $data['created_at'] = new \dateTime;
         $data['updated_at'] = new \dateTime;
+        // dd($data);
         //create job\
         JobsListing::create($data);
 

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 class emploer extends Authenticatable
 {
-    protected $fillable = ['name', 'email', 'password'];
+    protected $fillable = ['name', 'email', 'password','emploer_id'];
     /** @use HasFactory<\Database\Factories\EmploerFactory> */
     use HasFactory;
 
