@@ -21,7 +21,7 @@ class RegisterationController extends Controller
         ]);
         $emp = emploer::create($data);
 
-       Auth::login($emp);
+        Auth::login($emp);
         return redirect('/');
     }
 
@@ -33,9 +33,20 @@ class RegisterationController extends Controller
     public function login()
     {
         $data = Request()->validate([
-            "name" => ['required', 'min:3'],
             "email" => ['required', 'email'],
-            "password" => ['required', 'confirmed', 'min:6'],
+            "password" => ['required','min:6'],
         ]);
+
+        Auth::attempt($data);
+
+        request()->session()->regenerate();
+
+        redirect("/");
+    }
+
+    public function logout()
+    {
+        Auth::logout();
+        return redirect("/");
     }
 }
