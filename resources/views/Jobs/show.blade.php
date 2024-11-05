@@ -2,9 +2,11 @@
 <x-layout>
     <x-slot:title> job </x-slot:title>
     <x-slot:Dashbord> Job
-    <x-button href='/jobs/edite/{{ $job["id"] }}' class="bg-indigo-600 mx-2" > Edite </x-button>
-    {{-- <x-button href="/jobs/delete/{{ $job["id"] }}" class="bg-red-600"> Delete </x-button> --}}
-    <x-submit-button form="delete-form" class="bg-red-500">Delete</x-submit-button>
+  @if (Auth::user()->id==$job['emploer_id'])
+  <x-button href='/jobs/edite/{{ $job["id"] }}' class="bg-indigo-600 mx-2" > Edite </x-button>
+  {{-- <x-button href="/jobs/delete/{{ $job["id"] }}" class="bg-red-600"> Delete </x-button> --}}
+  <x-submit-button form="delete-form" class="bg-red-500">Delete</x-submit-button>
+  @endif
     </x-slot:Dashbord>
     @if ($job == null)
         {{ abort(404) }}

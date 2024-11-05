@@ -27,21 +27,20 @@ class RegisterationController extends Controller
 
     public function login_view()
     {
-        dd("your are in login mode");
+        return view('login.index');
     }
 
     public function login()
     {
         $user = Request()->validate([
             "email" => ['required', 'email'],
-            "password" => ['required','min:6'],
+            "password" => ['required', 'min:6'],
         ]);
 
-        Auth::attempt($user);
-
-        request()->session()->regenerate();
-
-        redirect("/");
+        if (Auth::attempt($user)) {
+            request()->session()->regenerate();
+            return redirect("/"); // Add return here
+        }
     }
 
     public function logout()
