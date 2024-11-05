@@ -2,7 +2,16 @@
 
 use App\Http\Controllers\JobListingController;
 use App\Http\Controllers\RegisterationController;
+use App\Mail\JobPostedMail;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
+
+Route::get("/mail", function () {
+    Mail::to("Mdiea0521@gmail.com")->send(
+        new JobPostedMail()
+    );
+    return "Dobe";
+});
 
 Route::view('/', 'Home');
 Route::view('/about', 'about');
@@ -22,5 +31,5 @@ Route::controller(RegisterationController::class)->group(function () {
     Route::post("/register", "register");
     Route::get("/login", "login_view");
     Route::post("/login", "login");
-    Route::get("/logout","logout");
+    Route::get("/logout", "logout");
 });

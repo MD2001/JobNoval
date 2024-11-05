@@ -2,11 +2,14 @@
 <x-layout>
     <x-slot:title> job </x-slot:title>
     <x-slot:Dashbord> Job
-  @if (Auth::user()->id==$job['emploer_id'])
-  <x-button href='/jobs/edite/{{ $job["id"] }}' class="bg-indigo-600 mx-2" > Edite </x-button>
-  {{-- <x-button href="/jobs/delete/{{ $job["id"] }}" class="bg-red-600"> Delete </x-button> --}}
-  <x-submit-button form="delete-form" class="bg-red-500">Delete</x-submit-button>
-  @endif
+        @auth
+        @if (Auth::user()->id == $job['emploer_id'])
+            <x-button href="/jobs/edite/{{ $job['id'] }}" class="bg-indigo-600 mx-2">Edit</x-button>
+            {{-- <x-button href="/jobs/delete/{{ $job['id'] }}" class="bg-red-600">Delete</x-button> --}}
+            <x-submit-button form="delete-form" class="bg-red-500">Delete</x-submit-button>
+        @endif
+    @endauth
+    
     </x-slot:Dashbord>
     @if ($job == null)
         {{ abort(404) }}
@@ -21,10 +24,12 @@
     @endif
 
     <div class=" m-1 mt-2 p-3 bg-gray-200 rounded-xl font-mono text-xl text-center">{{ $job->emploer->name }} <br>
-  </div>
+    </div>
 
-    <form id="delete-form" method="POST" action="/jobs/{{ $job["id"] }}">
-        @csrf
-        @method("DELETE")
-    </form>
+    @auth
+        <form id="delete-form" method="POST" action="/jobs/{{ $job['id'] }}">
+            @csrf
+            @method('DELETE')
+        </form>
+    @endauth
 </x-layout>
