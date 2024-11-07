@@ -42,7 +42,7 @@ class JobListingController extends Controller
         $data['updated_at'] = new \dateTime;
 
         $job=JobsListing::create($data);
-        Mail::to($job->emploer  )->send(
+        Mail::to($job->emploer  )->queue(
             new JobPostedMail($job)
         );
 
