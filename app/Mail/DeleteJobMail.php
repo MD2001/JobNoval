@@ -2,6 +2,7 @@
 
 namespace App\Mail;
 
+use App\Http\Controllers\JobListingController;
 use App\Models\JobsListing;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -10,7 +11,7 @@ use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
 use Illuminate\Queue\SerializesModels;
 
-class JobPostedMail extends Mailable
+class DeleteJobMail extends Mailable
 {
     use Queueable, SerializesModels;
 
@@ -28,7 +29,7 @@ class JobPostedMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            subject: 'Job Posted Mail',
+            subject: 'Delete Job Mail',
         );
     }
 
@@ -38,7 +39,7 @@ class JobPostedMail extends Mailable
     public function content(): Content
     {
         return new Content(
-            view: 'mail.JobPosted',
+            view: 'mail.JobDeleted',
         );
     }
 

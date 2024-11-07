@@ -2,8 +2,11 @@
 
 namespace App\Http\Controllers;
 
+use App\Mail\DeleteJobMail;
 use App\Models\JobsListing;
 use Illuminate\Http\Request;
+use App\Mail\JobPostedMail;
+use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Auth;
 
 class JobListingController extends Controller
@@ -37,9 +40,11 @@ class JobListingController extends Controller
         $data["emploer_id"]=Auth::user()->id;
         $data['created_at'] = new \dateTime;
         $data['updated_at'] = new \dateTime;
-        // dd($data);
-        //create job\
-        JobsListing::create($data);
+
+        $job=JobsListing::create($data);
+        Mail::to($job->emploer  )->send(
+            new JobPostedMail($job)
+        );
 
         //redirect to jobs.index page
         return redirect('/jobs');
@@ -60,12 +65,15 @@ class JobListingController extends Controller
         ]);
         
         JobsListing::find($id)->update($data);
-        
+         
         return redirect("/jobs/" . $id);
     }
 
     public function delete(int $id)
     {
+        mail::to(JobsListing::find($id)->emploer->email)->send(
+            new DeleteJobMail(JobsListing::find($id))
+        );
         JobsListing::destroy($id);
         return redirect("/jobs/");
     }
