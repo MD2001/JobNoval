@@ -11,11 +11,11 @@ Route::view('/about', 'about');
 Route::controller(JobListingController::class)->group(function () {
     Route::get('/jobs', 'index');
     Route::get('/jobs/sort/{tag}','tag_sort');
-    Route::get('/jobs/create', 'create');
-    Route::post('/jobs/store', 'store');
-    Route::get('/jobs/edite/{id}', 'edite_show');
-    Route::patch('/jobs/{id}', 'edite');
-    Route::delete('/jobs/{id}', 'delete');
+    Route::get('/jobs/create', 'create')->middleware('auth');
+    Route::post('/jobs/store', 'store')->middleware('auth');
+    Route::get('/jobs/edite/{id}', 'edite_show')->middleware('auth');
+    Route::patch('/jobs/{id}', 'edite')->middleware('auth');
+    Route::delete('/jobs/{id}', 'delete')->middleware('auth');
     Route::get('/jobs/{id}', 'show');
 });
 

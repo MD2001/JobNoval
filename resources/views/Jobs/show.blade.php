@@ -21,14 +21,14 @@
             <div class="font-mono text-3xl text-gray-700 pb-3 float-left pr-4 text-sky-600">{{ $job['salary'] }} </div>
             <div class="font-mono text-3xl text-gray-700 pb-3"> USD$ par year </div>
             <div class=" font-mono text-3xl text-gray-700 pb-3 mb-3">
-                <div class="pl-3 font-mono text-3xl text-gray-700 pb-3 float-left pr-4">Tags :</div>
 
-                @if ($job->tags->isEmpty())
-                    <div>Null</div>
-                @else
-                    @foreach ($job->tags->pluck('name')->toArray() as $tag)
-                        <li class="pl-9 text-2xl">{{ $tag }}</li>
-                    @endforeach
+                @if (!$job->tags->isEmpty())
+                    <div class="pl-3 font-mono text-3xl text-gray-700 pb-3 float-left pr-4">Tags :</div>
+                    <div class="relative   ">
+                        @foreach ($job->tags->pluck('name')->toArray() as $tag)
+                            <li class="pl-9 text-2xl">{{ $tag }}</li>
+                        @endforeach
+                    </div>
                 @endif
 
 

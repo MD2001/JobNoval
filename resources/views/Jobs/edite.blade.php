@@ -12,6 +12,12 @@
                 <x-input name="cname" id="cname" label='Company name' placeholder="Company name" value="{{ $job['cname'] }}"></x-input>              
                 <x-input name="title" id="title" label='Title' placeholder="Backend Developer" value="{{ $job['title'] }}" ></x-input>
                 <x-input name="salary" id="salary" label='Salary' placeholder="150,000" value="{{ $job['salary'] }}" span='USD$' ></x-input>
+
+
+
+                    {{-- TODO: make field to add tag to jobs --}}
+
+
             </div>
         </div>
         <div class="mt-6 flex items-center justify-end gap-x-6">
