@@ -12,7 +12,7 @@
     @else
         @foreach ($jobs as $job)
             <x-job-tag id="{{ $job['id'] }}" cname="{{ $job['cname'] }}" Job_title="{{ $job['title'] }}"
-                Salary="{{ $job['salary'] }}"></x-job-tag>
+                Salary="{{ $job['salary']  }}" tags="{{ $$job->tag }}" ></x-job-tag>
         @endforeach
     @endif
 
