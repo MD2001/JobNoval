@@ -3,13 +3,13 @@
     <x-slot:title> job </x-slot:title>
     <x-slot:Dashbord> Job
         @auth
-        @if (Auth::user()->id == $job['emploer_id'])
-            <x-button href="/jobs/edite/{{ $job['id'] }}" class="bg-indigo-600 mx-2">Edit</x-button>
-            {{-- <x-button href="/jobs/delete/{{ $job['id'] }}" class="bg-red-600">Delete</x-button> --}}
-            <x-submit-button form="delete-form" class="bg-red-500">Delete</x-submit-button>
-        @endif
-    @endauth
-    
+            @if (Auth::user()->id == $job['emploer_id'])
+                <x-button href="/jobs/edite/{{ $job['id'] }}" class="bg-indigo-600 mx-2">Edit</x-button>
+                {{-- <x-button href="/jobs/delete/{{ $job['id'] }}" class="bg-red-600">Delete</x-button> --}}
+                <x-submit-button form="delete-form" class="bg-red-500">Delete</x-submit-button>
+            @endif
+        @endauth
+
     </x-slot:Dashbord>
     @if ($job == null)
         {{ abort(404) }}
@@ -20,6 +20,19 @@
             <div class="pl-3 font-mono text-3xl text-gray-700 pb-3 float-left pr-4">Salary : </div>
             <div class="font-mono text-3xl text-gray-700 pb-3 float-left pr-4 text-sky-600">{{ $job['salary'] }} </div>
             <div class="font-mono text-3xl text-gray-700 pb-3"> USD$ par year </div>
+            <div class=" font-mono text-3xl text-gray-700 pb-3 mb-3">
+                <div class="pl-3 font-mono text-3xl text-gray-700 pb-3 float-left pr-4">Tags :</div>
+
+                @if ($job->tags->isEmpty())
+                    <div>Null</div>
+                @else
+                    @foreach ($job->tags->pluck('name')->toArray() as $tag)
+                        <li class="pl-9 text-2xl">{{ $tag }}</li>
+                    @endforeach
+                @endif
+
+
+            </div>
         </div>
     @endif
 

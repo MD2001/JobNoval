@@ -37,12 +37,12 @@ class JobListingController extends Controller
             'title' => ['required', 'min:3'],
             'salary' => ['required'],
         ]);
-        $data["emploer_id"]=Auth::user()->id;
+        $data["emploer_id"] = Auth::user()->id;
         $data['created_at'] = new \dateTime;
         $data['updated_at'] = new \dateTime;
 
-        $job=JobsListing::create($data);
-        Mail::to($job->emploer  )->queue(
+        $job = JobsListing::create($data);
+        Mail::to($job->emploer)->queue(
             new JobPostedMail($job)
         );
 
@@ -57,15 +57,15 @@ class JobListingController extends Controller
 
     public function edite(int $id)
     {
-        
+
         $data =  Request()->validate([
             'cname' => ['required', 'min:3'],
             'title' => ['required', 'min:3'],
             'salary' => ['required'],
         ]);
-        
+
         JobsListing::find($id)->update($data);
-         
+
         return redirect("/jobs/" . $id);
     }
 
@@ -76,5 +76,14 @@ class JobListingController extends Controller
         );
         JobsListing::destroy($id);
         return redirect("/jobs/");
+    }
+
+    public function tag_sort($tag)
+    {
+        $jobs = JobsListing::with(['tags'])->whereHas('tags', function ($query) use ($tag) {
+            $query->where('name', $tag); 
+        })->simplePaginate(3); 
+
+        return view('Jobs.index', ['jobs' => $jobs]);
     }
 }

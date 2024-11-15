@@ -12,9 +12,10 @@
     @else
         @foreach ($jobs as $job)
             <x-job-tag id="{{ $job['id'] }}" cname="{{ $job['cname'] }}" Job_title="{{ $job['title'] }}"
-                Salary="{{ $job['salary']  }}" tags="{{ $$job->tag }}" ></x-job-tag>
+                Salary="{{ $job['salary']  }}" tags="{{ $job->tags->pluck('name') }}" ></x-job-tag>
         @endforeach
+        {{ $jobs->links() }}
     @endif
 
-    {{ $jobs->links() }}
+  
 </x-layout>
