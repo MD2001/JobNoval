@@ -55,15 +55,16 @@ class JobListingController extends Controller
         return view("Jobs.edite", ["job" => JobsListing::find($id)]);
     }
 
-    public function edite(int $id)
+    public function edite(int $id, Request $request)
     {
-       
+        $tags = json_decode(Request('tags'));
+        // vlaidate and add tags to the job
         $data =  Request()->validate([
             'cname' => ['required', 'min:3'],
             'title' => ['required', 'min:3'],
             'salary' => ['required'],
         ]);
-        dd(request());
+        dd($data);
         JobsListing::find($id)->update($data);
 
         return redirect("/jobs/" . $id);
@@ -81,8 +82,8 @@ class JobListingController extends Controller
     public function tag_sort($tag)
     {
         $jobs = JobsListing::with(['tags'])->whereHas('tags', function ($query) use ($tag) {
-            $query->where('name', $tag); 
-        })->simplePaginate(3); 
+            $query->where('name', $tag);
+        })->simplePaginate(3);
 
         return view('Jobs.index', ['jobs' => $jobs]);
     }

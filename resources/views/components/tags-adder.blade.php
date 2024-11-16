@@ -91,7 +91,6 @@
                             // Clear the input field
                             inputField.value = '';
                         }
-
                         // Update the hidden input field with the tags array
                         let hiddenInput = document.getElementById('tags-input');
                         if (!hiddenInput) {
