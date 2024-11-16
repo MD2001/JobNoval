@@ -57,13 +57,13 @@ class JobListingController extends Controller
 
     public function edite(int $id)
     {
-
+       
         $data =  Request()->validate([
             'cname' => ['required', 'min:3'],
             'title' => ['required', 'min:3'],
             'salary' => ['required'],
         ]);
-
+        dd(request());
         JobsListing::find($id)->update($data);
 
         return redirect("/jobs/" . $id);
