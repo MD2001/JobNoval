@@ -10,6 +10,8 @@ use App\Models\tag;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Auth;
 
+use function PHPUnit\Framework\isEmpty;
+
 class JobListingController extends Controller
 {
     public function index()
@@ -67,9 +69,13 @@ class JobListingController extends Controller
         ]);
         $job = JobsListing::find($id);
         $job->update($data);
-        foreach ($tags as $tag) {
-            $jobTag = tag::firstorcreate(["name" => $tag]);
-            $job->tags()->attach($jobTag);
+        if (($tags != null) and (isEmpty($tags))) {
+            $tagsArr = [];
+            foreach ($tags as $tag) {
+                $jobTag = tag::firstorcreate(["name" => $tag]);
+                $tagsArr[] = $jobTag->id;
+            }
+            $job->tags()->sync($tagsArr);
         }
         return redirect("/jobs/" . $id);
     }
