@@ -6,6 +6,7 @@ use App\Mail\DeleteJobMail;
 use App\Models\JobsListing;
 use Illuminate\Http\Request;
 use App\Mail\JobPostedMail;
+use App\Models\tag;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Auth;
 
@@ -55,7 +56,7 @@ class JobListingController extends Controller
         return view("Jobs.edite", ["job" => JobsListing::find($id)]);
     }
 
-    public function edite(int $id, Request $request)
+    public function edite(int $id)
     {
         $tags = json_decode(Request('tags'));
         // vlaidate and add tags to the job
@@ -64,9 +65,12 @@ class JobListingController extends Controller
             'title' => ['required', 'min:3'],
             'salary' => ['required'],
         ]);
-        dd($data);
-        JobsListing::find($id)->update($data);
-
+        $job = JobsListing::find($id);
+        $job->update($data);
+        foreach ($tags as $tag) {
+            $jobTag = tag::firstorcreate(["name" => $tag]);
+            $job->tags()->attach($jobTag);
+        }
         return redirect("/jobs/" . $id);
     }
 
