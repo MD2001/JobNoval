@@ -34,7 +34,7 @@ class JobListingController extends Controller
     public function store()
     {
         //validation 
-
+        $tags = json_decode(Request('tags'));
         $data =  Request()->validate([
             'cname' => ['required', 'min:3'],
             'title' => ['required', 'min:3'],
@@ -45,6 +45,15 @@ class JobListingController extends Controller
         $data['updated_at'] = new \dateTime;
 
         $job = JobsListing::create($data);
+        if (($tags != null) and (isEmpty($tags))) {
+            $tagsArr = [];
+            foreach ($tags as $tag) {
+                $jobTag = tag::firstorcreate(["name" => $tag]);
+                $tagsArr[] = $jobTag->id;
+            }
+            $job->tags()->sync($tagsArr);
+        }
+
         Mail::to($job->emploer)->queue(
             new JobPostedMail($job)
         );

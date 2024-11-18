@@ -11,6 +11,7 @@
                 <x-input name="cname" id="cname" label='Company name' placeholder="Company name"></x-input>              
                 <x-input name="title" id="title" label='Title' placeholder="Backend Developer" ></x-input>
                 <x-input name="salary" id="salary" label='Salary' placeholder="150,000" span='USD$'></x-input>
+                <x-tags-adder></x-tags-adder>
             </div>
         </div>
         <div class="mt-6 flex items-center justify-end gap-x-6">
