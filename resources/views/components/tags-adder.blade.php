@@ -3,8 +3,19 @@
     'id' => 'tag',
     'placeholder' => 'add tag',
     'label' => 'Tags',
-    'span' => null,
+    'tags' => null,
 ])
+
+@php
+    if ($tags != null) {
+        // Step 1: Decode the HTML entities
+        $decodedString = html_entity_decode($tags);
+
+        // Step 2: Convert the decoded string to a PHP array
+        $tags = collect(json_decode($decodedString))->pluck('name');
+    }
+@endphp
+
 <div class="mt-5 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6 space-y-1">
     <div class="sm:col-span-4">
         <label for="{{ $name }}" class="text-sm/6 font-medium text-gray-900 ">{{ $label }}</label>
@@ -17,21 +28,26 @@
         </div>
 
         <div class="flex justify-start space-x-2">
-
             <div id="input-container"
-                class=" w-96 mt-2 flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
+                class="w-96 mt-2 flex rounded-md shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-inset focus-within:ring-indigo-600 sm:max-w-md">
             </div>
-            <div id="button-input-container" class=" w-24 sm:max-w-md"></div>
+            <div id="button-input-container" class="w-24 sm:max-w-md"></div>
         </div>
-        <div id='tagcontiner' class="block my-2"></div>
-        
+
+        <div id="tagcontainer" class="block my-2"></div>
+
         <script>
             document.addEventListener('DOMContentLoaded', () => {
                 const inputContainer = document.getElementById('input-container');
                 const buttonInputContainer = document.getElementById('button-input-container');
                 const addInputBtn = document.getElementById(@json($id));
-                const tagsContainer = document.getElementById('tagcontiner'); // Create a container for the tags
-                const tags = []; // Array to store the tags
+                const tagsContainer = document.getElementById('tagcontainer'); // Create a container for the tags
+                const tags = @json($tags ?? []); // Initialize tags with server-provided values
+
+                // Render existing tags dynamically
+                tags.forEach(tagValue => {
+                    createTagElement(tagValue);
+                });
 
                 addInputBtn.addEventListener('click', (event) => {
                     event.preventDefault();
@@ -57,51 +73,54 @@
 
                         // Get the value of the input field and add it to the tags array
                         const tagValue = inputField.value.trim();
-                        if (tagValue) {
+                        if (tagValue && !tags.includes(tagValue)) {
                             tags.push(tagValue);
-
-                            // Display the added tags dynamically
-                            const tagDisplay = document.createElement('span');
-                            tagDisplay.textContent = tagValue;
-                            tagDisplay.className =
-                                'inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 cursor-pointer';
-
-                            // Add click event to remove tag
-                            tagDisplay.addEventListener('click', () => {
-                                // Remove the tag from the tags array
-                                const index = tags.indexOf(tagValue);
-                                if (index > -1) {
-                                    tags.splice(index, 1); // Remove the tag from the array
-                                }
-
-                                // Remove the tag element from the DOM
-                                tagDisplay.remove();
-
-                                // Update the hidden input field
-                                const hiddenInput = document.getElementById('tags-input');
-                                if (hiddenInput) {
-                                    hiddenInput.value = JSON.stringify(
-                                        tags); // Update with the new array
-                                }
-                            });
-
-                            tagsContainer.appendChild(
-                                tagDisplay); // Append the tag to the tags container
+                            createTagElement(tagValue);
 
                             // Clear the input field
                             inputField.value = '';
                         }
+
                         // Update the hidden input field with the tags array
-                        let hiddenInput = document.getElementById('tags-input');
-                        if (!hiddenInput) {
-                            hiddenInput = document.createElement('input');
-                            hiddenInput.type = 'hidden';
-                            hiddenInput.name = 'tags';
-                            hiddenInput.id = 'tags-input';
-                            inputContainer.appendChild(hiddenInput);
-                        }
-                        hiddenInput.value = JSON.stringify(tags); // Store as JSON string
+                        updateHiddenInput(tags);
                     });
                 });
+
+                // Function to create and display a tag element
+                function createTagElement(tagValue) {
+                    const tagDisplay = document.createElement('span');
+                    tagDisplay.textContent = tagValue;
+                    tagDisplay.className =
+                        'inline-block bg-gray-200 rounded-full px-3 py-1 text-sm font-semibold text-gray-700 cursor-pointer';
+
+                    // Add click event to remove tag
+                    tagDisplay.addEventListener('click', () => {
+                        const index = tags.indexOf(tagValue);
+                        if (index > -1) {
+                            tags.splice(index, 1); // Remove the tag from the array
+                        }
+                        tagDisplay.remove(); // Remove the tag element
+
+                        // Update the hidden input field
+                        updateHiddenInput(tags);
+                    });
+
+                    tagsContainer.appendChild(tagDisplay); // Append to tags container
+                }
+
+                // Function to update the hidden input field
+                function updateHiddenInput(tagsArray) {
+                    let hiddenInput = document.getElementById('tags-input');
+                    if (!hiddenInput) {
+                        hiddenInput = document.createElement('input');
+                        hiddenInput.type = 'hidden';
+                        hiddenInput.name = 'tags';
+                        hiddenInput.id = 'tags-input';
+                        inputContainer.appendChild(hiddenInput);
+                    }
+                    hiddenInput.value = JSON.stringify(tagsArray); // Store as JSON string
+                }
             });
         </script>
+    </div>
+</div>
