@@ -1,4 +1,4 @@
-@props(['jobs' => null, 'userJobs' => [], 'isSerch' => false])
+@props(['jobs' => null, 'userJobs' => [], 'isSerch' => false, 'jobsall' => null])
 <x-layout>
     <x-slot:title> jobs </x-slot:title>
     <x-slot:Dashbord> Jobs
@@ -25,11 +25,13 @@
                     Salary="{{ $job['salary'] }}" tags="{{ $job->tags->pluck('name') }}"></x-job-tag>
             @endforeach
         </div>
-    
-            {{ $jobs->links() }}
-        </div>
+        {{ $jobs->appends(['panel_page' => request('panel_page')])->links() }}
+        <div class=" px-8 w-full justify-between">
+            @foreach ($jobsall as $job)
+                <x-job-paners id="{{ $job['id'] }}" cname="{{ $job['cname'] }}" Job_title="{{ $job['title'] }}"
+                    Salary="{{ $job['salary'] }}" tags="{{ $job->tags->pluck('name') }}"></x-job-paners>
+            @endforeach
 
+            {{ $jobsall->appends(['card_page' => request('card_page')])->links() }}
     @endif
-
-
 </x-layout>

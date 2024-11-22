@@ -16,9 +16,11 @@ class JobListingController extends Controller
 {
     public function index()
     {
-        $jobs = JobsListing::latest()->simplePaginate(3);
-        return view("Jobs.index", ["jobs" => $jobs]);
+        $jobs = JobsListing::latest()->simplePaginate(3, ['*'], 'card_page');
+        $jobsall = JobsListing::latest()->simplePaginate(20, ['*'], 'panel_page');
+        return view("Jobs.index", compact('jobs', 'jobsall'));
     }
+
 
 
     public function show(int $id)
@@ -99,8 +101,8 @@ class JobListingController extends Controller
     }
 
     public function tag_sort($tag)
-    {   
-        $userJobs=collect();
+    {
+        $userJobs = collect();
         if (Auth::check()) {
             $user = Auth::user();
             $userJobs = $user->job;
