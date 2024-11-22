@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\emploer;
+use Error;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -40,6 +41,8 @@ class RegisterationController extends Controller
         if (Auth::attempt($user)) {
             request()->session()->regenerate();
             return redirect("/"); // Add return here
+        } else {
+            abort(404, "no such user ");
         }
     }
 
