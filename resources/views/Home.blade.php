@@ -11,8 +11,8 @@
             <div class="grid justify-items-center font-bold text-blue-500 text-xl">
                 {{ 'you have ' . Auth::user()->job->count() . ' job' }}</div>
             @foreach (Auth::user()->job as $job)
-                <x-job-tag id="{{ $job['id'] }}" cname="{{ $job['cname'] }}" Job_title="{{ $job['title'] }}"
-                    Salary="{{ $job['salary'] }}" tags="{{ $job->tags->pluck('name') }}"></x-job-tag>
+                <x-job-paners id="{{ $job['id'] }}" cname="{{ $job['cname'] }}" Job_title="{{ $job['title'] }}"
+                    Salary="{{ $job['salary'] }}" tags="{{ $job->tags->pluck('name') }}"></x-job-paners>
             @endforeach
         @endif
     @endauth

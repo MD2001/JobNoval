@@ -112,6 +112,10 @@ class JobListingController extends Controller
             $query->where('name', $tag);
         })->whereNotIn('id', $userJobs->pluck('id')->toArray())->simplePaginate(3);
 
-        return view('Jobs.index', ['jobs' => $jobs, "userJobs" => $userJobs ?? collect()]);
+        $jobsall = JobsListing::with(['tags'])->whereHas('tags', function ($query) use ($tag) {
+            $query->where('name', $tag);
+        })->whereNotIn('id', $userJobs->pluck('id')->toArray())->simplePaginate(20);
+
+        return view('Jobs.index', ['jobs' => $jobs, "userJobs" => $userJobs ?? collect(),"jobsall"=>$jobsall]);
     }
 }
