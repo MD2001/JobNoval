@@ -100,25 +100,21 @@ class JobListingController extends Controller
 
     public function tag_sort($tag)
     {
-        $isSerch = true;
-        $arr = [];
         if (Auth::check()) {
-            // Retrieve the user's jobs with their tags (using eager loading with the query builder)
             $userJobs = Auth::user()->job()->with('tags')->get();
-        
-            // Loop through each job to collect tags
-            foreach ($userJobs as $job) {
-                foreach ($job->tags as $tag) {
-                    $arr[$tag->id] = $tag->name; // Assuming 'name' is the column for the tag
+            foreach($userJobs as $job)
+            {
+                foreach($job->tags as $tag)
+                {
+                    $tags[$tag->id]=$tag->name;
                 }
             }
         }
-        dd($arr);
-        
+        dd($tags);
         $jobs = JobsListing::with(['tags'])->whereHas('tags', function ($query) use ($tag) {
             $query->where('name', $tag);
         })->whereNotIn('id', $userJobs->pluck('id')->toArray())->simplePaginate(3);
 
-        return view('Jobs.index', ['jobs' => $jobs, "isSerch" => $isSerch, "userJobs" => $userJobs ?? collect()]);
+        return view('Jobs.index', ['jobs' => $jobs, "userJobs" => $userJobs ?? collect()]);
     }
 }
