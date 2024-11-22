@@ -99,18 +99,13 @@ class JobListingController extends Controller
     }
 
     public function tag_sort($tag)
-    {
+    {   
+        $userJobs=collect();
         if (Auth::check()) {
-            $userJobs = Auth::user()->job()->with('tags')->get();
-            foreach($userJobs as $job)
-            {
-                foreach($job->tags as $tag)
-                {
-                    $tags[$tag->id]=$tag->name;
-                }
-            }
+            $user = Auth::user();
+            $userJobs = $user->job;
         }
-        dd($tags);
+        // dd($userJobs);
         $jobs = JobsListing::with(['tags'])->whereHas('tags', function ($query) use ($tag) {
             $query->where('name', $tag);
         })->whereNotIn('id', $userJobs->pluck('id')->toArray())->simplePaginate(3);
