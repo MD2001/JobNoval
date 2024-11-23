@@ -25,7 +25,7 @@
                     Salary="{{ $job['salary'] }}" tags="{{ $job->tags->pluck('name') }}"></x-job-tag>
             @endforeach
         </div>
-        {{ $jobs->appends(['panel_page' => request('panel_page')])->links() }}
+        {{ $jobs->appends(['panel_page' => request('panel_page')])->links("vendor.pagination.simple-tailwindModified") }}
         <div class=" px-8 w-full justify-between">
             @foreach ($jobsall as $job)
                 <x-job-paners id="{{ $job['id'] }}" cname="{{ $job['cname'] }}" Job_title="{{ $job['title'] }}"
