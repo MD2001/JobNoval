@@ -25,7 +25,7 @@
             <li class="font-bold"> every email has been droped from database please create new account </li>
             <li> you have now to prespective to show jobs</li>
             <li> tags applay in both prespectives </li>
-            <li> </li>
+            <li> in every prespective you have freedom to scroll in any one with wone pagention arrows</li>
         </div>
     </div>
 
