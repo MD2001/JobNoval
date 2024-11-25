@@ -107,7 +107,7 @@ class JobListingController extends Controller
             $user = Auth::user();
             $userJobs = $user->job;
         }
-        // dd($userJobs);
+        dd($userJobs);
         $jobs = JobsListing::with(['tags'])->whereHas('tags', function ($query) use ($tag) {
             $query->where('name', $tag);
         })->whereNotIn('id', $userJobs->pluck('id')->toArray())->simplePaginate(3);
