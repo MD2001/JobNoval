@@ -18,6 +18,12 @@ class JobListingController extends Controller
     {
         $jobs = JobsListing::latest()->simplePaginate  (3, ['*'], 'card_page');
         $jobsall = JobsListing::latest()->simplePaginate(20, ['*'], 'panel_page');
+
+        if (request()->ajax()) {
+            // Return the partial view for AJAX requests
+            return view('Jobs.index.pageinations', compact('jobs'))->render();
+        }
+        
         return view("Jobs.index", compact('jobs', 'jobsall'));
     }
 
