@@ -16,7 +16,7 @@ class JobListingController extends Controller
 {
     public function index()
     {
-        $jobs = JobsListing::latest()->simplePaginate(3, ['*'], 'card_page');
+        $jobs = JobsListing::latest()->simplePaginate  (3, ['*'], 'card_page');
         $jobsall = JobsListing::latest()->simplePaginate(20, ['*'], 'panel_page');
         return view("Jobs.index", compact('jobs', 'jobsall'));
     }
@@ -110,11 +110,11 @@ class JobListingController extends Controller
         dd($userJobs);
         $jobs = JobsListing::with(['tags'])->whereHas('tags', function ($query) use ($tag) {
             $query->where('name', $tag);
-        })->whereNotIn('id', $userJobs->pluck('id')->toArray())->simplePaginate(3);
+        })->whereNotIn('id', $userJobs->pluck('id')->toArray())->simplePaginate(3, ['*'], 'card_page');;
 
         $jobsall = JobsListing::with(['tags'])->whereHas('tags', function ($query) use ($tag) {
             $query->where('name', $tag);
-        })->whereNotIn('id', $userJobs->pluck('id')->toArray())->simplePaginate(20);
+        })->whereNotIn('id', $userJobs->pluck('id')->toArray())->simplePaginate(20, ['*'], 'panel_page');
 
         return view('Jobs.index', ['jobs' => $jobs, "userJobs" => $userJobs ?? collect(),"jobsall"=>$jobsall]);
     }
