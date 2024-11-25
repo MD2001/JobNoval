@@ -1,5 +1,8 @@
 @props(['jobs' => null, 'userJobs' => [], 'isSerch' => false, 'jobsall' => null])
 <x-layout>
+    <x-slot:meta>
+        <meta name="csrf-token" content="{{ csrf_token() }}">
+    </x-slot:meta>
     <x-slot:title> jobs </x-slot:title>
     <x-slot:Dashbord> Jobs
         @auth
