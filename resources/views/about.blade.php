@@ -19,6 +19,7 @@
             <li> when you click on tags on any job it will show you only jobs with the same tags </li>
             <li> in show page it will show you the tags that you assigned it </li>
         </div>
+        
         <div class="text-black font-bold overscroll-contain flex"> version (v1.2) <span class="text-blue-500 px-2"> new</span>
         </div>
         <div class="text-black font-bold">
