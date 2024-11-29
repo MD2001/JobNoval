@@ -14,7 +14,7 @@
         <div class="text-black font-bold overscroll-contain"> version (v1.1)</div>
         <div class="text-gray-500">
             <li class="font-bold"> every email has been droped from database please create new account </li>
-            <li> edite jobs to add tags and create with tags is add it
+            <li> Edite jobs to add tags and create with tags is add it
             </li>
             <li> when you click on tags on any job it will show you only jobs with the same Tags </li>
             <li> in show page it will show you the tags that you assigned it </li>
